@@ -246,7 +246,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50), child: _appBar()),
+        preferredSize: const Size.fromHeight(50),
+        child: _appBar(),
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: CustomScrollView(
         slivers: <Widget>[
