@@ -146,17 +146,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Heart Health News", style: TextStyles.title.bold),
-              IconButton(
-                      icon: Icon(
-                        Icons.sort,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      onPressed: () {})
-                  .p(12)
-                  .ripple(() {},
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
+              Text("Heart Health News", style: TextStyles.title.bold).p16,
             ],
           ).hP16,
           _getArticleWidgetList()
@@ -196,29 +186,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _article(ArticleModel model) {
-    return GestureDetector(
-      onTap: () => _launchURL(model.url),
-      behavior: HitTestBehavior.translucent,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-        child: ListTile(
-          contentPadding: const EdgeInsets.all(0),
-          title: Text(model.title, style: TextStyles.title.bold),
-          subtitle: Text(
-            model.description,
-            style: TextStyles.bodySm.subTitleColor,
-          ),
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            size: 30,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-      ).ripple(
-        () {},
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+      child: GestureDetector(
+          onTap: () => _launchURL(model.url),
+          behavior: HitTestBehavior.translucent,
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(0),
+            title: Text(model.title, style: TextStyles.title.bold),
+            subtitle: Text(
+              model.description,
+              style: TextStyles.bodySm.subTitleColor,
+            ),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
+              size: 30,
+              color: Theme.of(context).primaryColor,
+            ),
+          )),
+    ).ripple(
+      () {},
+      borderRadius: const BorderRadius.all(
+        Radius.circular(20),
       ),
     );
   }
@@ -268,7 +257,7 @@ class _HomePageState extends State<HomePage> {
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
-      await launch(url, forceWebView: true);
+      await launch(url, forceWebView: true, enableJavaScript: true);
     } else {
       throw 'Could not launch $url';
     }
