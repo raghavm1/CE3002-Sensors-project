@@ -42,7 +42,6 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(
               color: Theme.of(context).backgroundColor,
             ),
-            child: Image.asset("assets/user.png", fit: BoxFit.fill),
           ),
         ).p(8),
       ],
@@ -51,7 +50,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100), child: _appBar()),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
