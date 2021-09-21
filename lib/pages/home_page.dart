@@ -88,10 +88,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _categoryCard(String title, {Color? color, Color? lightColor}) {
     TextStyle titleStyle = TextStyles.title.bold.white;
-    TextStyle subtitleStyle = TextStyles.body.bold.white;
     if (AppTheme.fullWidth(context) < 392) {
       titleStyle = TextStyles.body.bold.white;
-      subtitleStyle = TextStyles.bodySm.bold.white;
     }
     return AspectRatio(
       aspectRatio: 6 / 8,
@@ -112,30 +110,28 @@ class _HomePageState extends State<HomePage> {
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Container(
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  top: -20,
-                  left: -20,
-                  child: CircleAvatar(
-                    backgroundColor: lightColor,
-                    radius: 60,
-                  ),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: -20,
+                left: -20,
+                child: CircleAvatar(
+                  backgroundColor: lightColor,
+                  radius: 60,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(title, style: titleStyle).hP8,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ).p16
-              ],
-            ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Flexible(
+                    child: Text(title, style: titleStyle).hP8,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ).p16
+            ],
           ),
         ).ripple(() {},
             borderRadius: const BorderRadius.all(Radius.circular(20))),
@@ -152,12 +148,15 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Text("Heart Health News", style: TextStyles.title.bold),
               IconButton(
-                  icon: Icon(
-                    Icons.sort,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {})
-              // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
+                      icon: Icon(
+                        Icons.sort,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      onPressed: () {})
+                  .p(12)
+                  .ripple(() {},
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
             ],
           ).hP16,
           _getArticleWidgetList()
@@ -175,50 +174,53 @@ class _HomePageState extends State<HomePage> {
 
   Widget _articleTile(ArticleModel model) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              offset: const Offset(4, 4),
-              blurRadius: 10,
-              color: LightColor.grey.withOpacity(.2),
-            ),
-            BoxShadow(
-              offset: const Offset(-3, 0),
-              blurRadius: 15,
-              color: LightColor.grey.withOpacity(.1),
-            )
-          ],
-        ),
-        child: _article(model));
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+            color: LightColor.grey.withOpacity(.2),
+          ),
+          BoxShadow(
+            offset: const Offset(-3, 0),
+            blurRadius: 15,
+            color: LightColor.grey.withOpacity(.1),
+          )
+        ],
+      ),
+      child: _article(model),
+    );
   }
 
   Widget _article(ArticleModel model) {
     return GestureDetector(
-        onTap: () {
-          _launchURL(model.url);
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-          child: ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            title: Text(model.title, style: TextStyles.title.bold),
-            subtitle: Text(
-              model.description,
-              style: TextStyles.bodySm.subTitleColor,
-            ),
-            trailing: Icon(
-              Icons.keyboard_arrow_right,
-              size: 30,
-              color: Theme.of(context).primaryColor,
-            ),
+      onTap: () => _launchURL(model.url),
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(0),
+          title: Text(model.title, style: TextStyles.title.bold),
+          subtitle: Text(
+            model.description,
+            style: TextStyles.bodySm.subTitleColor,
           ),
-        ).ripple(() {},
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),
-            )));
+          trailing: Icon(
+            Icons.keyboard_arrow_right,
+            size: 30,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ).ripple(
+        () {},
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+    );
   }
 
   Color randomColor() {
