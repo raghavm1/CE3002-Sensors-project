@@ -4,7 +4,31 @@ import 'package:health_app/theme/light_color.dart';
 import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
 import 'package:charts_flutter/flutter.dart';
+/*
+class HeartRoute extends StatelessWidget {
+  const HeartRoute({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('First Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Open route'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  HRPage()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+*/
 class HRPage extends StatefulWidget {
   HRPage({Key? key}) : super(key: key);
 

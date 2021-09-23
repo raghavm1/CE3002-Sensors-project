@@ -8,6 +8,8 @@ import 'package:health_app/theme/light_color.dart';
 import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:health_app/pages/hr_monitor.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -93,48 +95,55 @@ class _HomePageState extends State<HomePage> {
     }
     return AspectRatio(
       aspectRatio: 6 / 8,
-      child: Container(
-        height: 280,
-        width: AppTheme.fullWidth(context) * .3,
-        margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              offset: const Offset(4, 4),
-              blurRadius: 10,
-              color: lightColor!.withOpacity(.8),
-            )
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: -20,
-                left: -20,
-                child: CircleAvatar(
-                  backgroundColor: lightColor,
-                  radius: 60,
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Flexible(
-                    child: Text(title, style: titleStyle).hP8,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ).p16
+      child: InkWell(
+        child: Container(
+          height: 280,
+          width: AppTheme.fullWidth(context) * .3,
+          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                offset: const Offset(4, 4),
+                blurRadius: 10,
+                color: lightColor!.withOpacity(.8),
+              )
             ],
           ),
-        ).ripple(() {},
-            borderRadius: const BorderRadius.all(Radius.circular(20))),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  top: -20,
+                  left: -20,
+                  child: CircleAvatar(
+                    backgroundColor: lightColor,
+                    radius: 60,
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Flexible(
+                      child: Text(title, style: titleStyle).hP8,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ).p16
+              ],
+            ),
+          ).ripple(() {},
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
+        ),
+        onTap: (){
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  HRPage()));
+        },
       ),
     );
   }
