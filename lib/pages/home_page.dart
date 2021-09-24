@@ -10,7 +10,6 @@ import 'package:health_app/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:health_app/pages/hr_monitor.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -75,12 +74,37 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              _categoryCard("Heart Rate Monitor",
-                  color: Colors.red[400], lightColor: Colors.red[300]),
-              _categoryCard("Some Function",
-                  color: LightColor.skyBlue, lightColor: LightColor.lightBlue),
-              _categoryCard("Another Function",
-                  color: LightColor.orange, lightColor: LightColor.lightOrange)
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HRPage()),
+                  );
+                },
+                child: _categoryCard("Heart Rate Monitor",
+                    color: Colors.red[400], lightColor: Colors.red[300]),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HRPage()),
+                  );
+                },
+                child: _categoryCard("Some Function",
+                    color: LightColor.skyBlue,
+                    lightColor: LightColor.lightBlue),
+              ),
+              InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HRPage()),
+                    );
+                  },
+                  child: _categoryCard("Another Function",
+                      color: LightColor.orange,
+                      lightColor: LightColor.lightOrange)),
             ],
           ),
         ),
@@ -95,11 +119,11 @@ class _HomePageState extends State<HomePage> {
     }
     return AspectRatio(
       aspectRatio: 6 / 8,
-      child: InkWell(
-        child: Container(
+      child: Container(
           height: 280,
           width: AppTheme.fullWidth(context) * .3,
-          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+          margin:
+              const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
           decoration: BoxDecoration(
             color: color,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -136,15 +160,7 @@ class _HomePageState extends State<HomePage> {
                 ).p16
               ],
             ),
-          ).ripple(() {},
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-        ),
-        onTap: (){
-          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  HRPage()));
-        },
-      ),
+          )),
     );
   }
 
