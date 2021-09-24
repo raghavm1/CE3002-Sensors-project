@@ -3,6 +3,8 @@ import 'package:health_app/theme/extention.dart';
 import 'package:health_app/theme/light_color.dart';
 import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
+import 'package:charts_flutter/flutter.dart';
+
 class HRPage extends StatefulWidget {
   HRPage({Key? key}) : super(key: key);
 
@@ -11,10 +13,7 @@ class HRPage extends StatefulWidget {
 }
 
 class _HRPageState extends State<HRPage> {
-
-
   bool _toggled = false;
-  /*
   List<SensorValue> _data = [];
   double _alpha = 0.3;
   bool _processing = false;
@@ -63,10 +62,8 @@ class _HRPageState extends State<HRPage> {
     }
   }
 
-
-*/
-  _toggle(){
-    setState((){
+  _toggle() {
+    setState(() {
       _toggled = !_toggled;
     });
   }
@@ -95,39 +92,39 @@ class _HRPageState extends State<HRPage> {
         child: _appBar(),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body:SafeArea(
+      body: SafeArea(
         child: Column(
-        children:<Widget>[
-          Expanded(
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: IconButton(
-                icon: Icon(_toggled ? Icons.favorite : Icons.favorite_border),
+          children: <Widget>[
+            Expanded(
+              child: Container(
                 color: Colors.red,
-                iconSize: 128,
-                onPressed: () {
-                    _toggle();
-                },
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(18),
-                  ),
-                  color: Colors.black),
-              //child: Chart(_data),
+            Expanded(
+              child: Center(
+                child: IconButton(
+                  icon: Icon(_toggled ? Icons.favorite : Icons.favorite_border),
+                  color: Colors.red,
+                  iconSize: 128,
+                  onPressed: () {
+                    _toggle();
+                  },
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(18),
+                    ),
+                    color: Colors.black),
+                //child: Chart(_data),
+              ),
+            ),
+          ],
+        ),
       ), //body:  //add body here
     );
   }
