@@ -9,7 +9,7 @@ import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:health_app/pages/hr_monitor.dart';
-
+import 'package:health_app/pages/chart.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
