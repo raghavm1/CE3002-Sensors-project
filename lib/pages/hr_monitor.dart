@@ -3,7 +3,7 @@ import 'package:health_app/theme/extention.dart';
 import 'package:health_app/theme/light_color.dart';
 import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
-import 'package:charts_flutter/flutter.dart';
+
 /*
 class HeartRoute extends StatelessWidget {
   const HeartRoute({Key? key}) : super(key: key);
@@ -39,14 +39,18 @@ class HRPage extends StatefulWidget {
 class _HRPageState extends State<HRPage> {
   Widget _appBar() {
     return AppBar(
-      elevation: 0,
-      backgroundColor: Theme.of(context).backgroundColor,
-      leading: const Icon(
-        Icons.arrow_back,
-        size: 30,
-        color: LightColor.grey,
-      ),
-    );
+        elevation: 0,
+        backgroundColor: Theme.of(context).backgroundColor,
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back,
+            size: 30,
+            color: LightColor.grey,
+          ),
+          onTap: () {
+            Navigator.popUntil(context, ModalRoute.withName('/'));
+          },
+        ));
   }
 
   @override
