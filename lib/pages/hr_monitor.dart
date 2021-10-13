@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:health_app/theme/extention.dart';
 import 'package:health_app/theme/light_color.dart';
 import 'package:health_app/theme/text_styles.dart';
 import 'package:health_app/theme/theme.dart';
 import 'package:charts_flutter/flutter.dart';
-
+import 'chart.dart';
+import 'package:health_app/config/http_function.dart';
 class HRPage extends StatefulWidget {
   HRPage({Key? key}) : super(key: key);
 
@@ -86,6 +89,7 @@ class _HRPageState extends State<HRPage> {
 
   @override
   Widget build(BuildContext context) {
+    var data = '';
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -108,6 +112,10 @@ class _HRPageState extends State<HRPage> {
                   iconSize: 128,
                   onPressed: () {
                     _toggle();
+                    if(_toggled){
+                      Future <HeartData> a = fetchHeartbeat();
+                      debugPrint(a.toString());
+                    }
                   },
                 ),
               ),
