@@ -89,7 +89,8 @@ class _HRPageState extends State<HRPage> {
 
   @override
   Widget build(BuildContext context) {
-    var data = '';
+
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -113,8 +114,17 @@ class _HRPageState extends State<HRPage> {
                   onPressed: () {
                     _toggle();
                     if(_toggled){
-                      Future <HeartData> a = fetchHeartbeat();
-                      debugPrint(a.toString());
+
+                          Future <dynamic> a = getHData();
+                          print("check");
+                          DateTime now = DateTime.now();
+                          SensorValue single_sample = SensorValue(now, 100);
+                          _data.add(single_sample);
+                          _updateBPM();
+
+                    // single_sample.time = now;
+                    // single_sample.value = a;
+                    //print(a.toString());
                     }
                   },
                 ),
@@ -128,7 +138,7 @@ class _HRPageState extends State<HRPage> {
                       Radius.circular(18),
                     ),
                     color: Colors.black),
-                //child: Chart(_data),
+                child: Chart(_data),
               ),
             ),
           ],

@@ -10,13 +10,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 getHData() async {
-   http.Response response = await http.get(Uri.parse('http://10.0.2.2:5000'));
+  print("here");
+   http.Response response = await http.get(Uri.parse('http://127.0.0.1:5000'));
+   print(response.body);
   return response.body;
 }
 
 Future<HeartData> fetchHeartbeat() async {
   final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000'));
+      .get(Uri.parse('http://10.0.2.2:5000'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
