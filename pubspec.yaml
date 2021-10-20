@@ -39,6 +39,8 @@ dependencies:
     git:
       url: git://github.com/google/charts.git
       path: charts_flutter
+  sse_client: ^0.1.0
+  universal_html: ^2.0.8
 
 dev_dependencies:
   flutter_test:

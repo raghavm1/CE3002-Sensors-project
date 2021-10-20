@@ -7,32 +7,59 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
+import "package:universal_html/html.dart" as html;
+import 'package:sse_client/sse_client.dart';
 
-getHData() async {
-  print("here");
-   http.Response response = await http.get(Uri.parse('http://127.0.0.1:5000'));
-   print(response.body);
-  return response.body;
-}
+class Sse {
+  final html.EventSource eventSource;
+  final StreamController<String> streamController;
 
-Future<HeartData> fetchHeartbeat() async {
-  final response = await http
-      .get(Uri.parse('http://10.0.2.2:5000'));
+  Sse._internal(this.eventSource, this.streamController);
 
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return HeartData.returnString(response.body);
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
+  factory Sse.connect({
+    required Uri uri,
+    bool withCredentials = false,
+    bool closeOnError = true,
+  }) {
+    final streamController = StreamController<String>();
+    final eventSource =
+        html.EventSource(uri.toString(), withCredentials: withCredentials);
+    debugPrint("Conn");
+    eventSource.addEventListener('message', (html.Event message) {
+      debugPrint("rece");
+      streamController.add((message as html.MessageEvent).data as String);
+    });
+
+    eventSource.addEventListener('message', (e) {
+      debugPrint("rece");
+      streamController.add((e as html.MessageEvent).data as String);
+    });
+
+    ///close if the endpoint is not working
+    if (closeOnError) {
+      eventSource.onError.listen((event) {
+        eventSource.close();
+        streamController.close();
+      });
+    }
+    return Sse._internal(eventSource, streamController);
+  }
+
+  Stream get stream => streamController.stream;
+
+  bool isClosed() =>
+      this.streamController == null || this.streamController.isClosed;
+
+  void close() {
+    this.eventSource.close();
+    this.streamController.close();
   }
 }
 
 class HeartData {
-
   final String title;
 
   HeartData({
@@ -40,8 +67,6 @@ class HeartData {
   });
 
   factory HeartData.returnString(String string) {
-    return HeartData(
-      title: string
-    );
+    return HeartData(title: string);
   }
 }
