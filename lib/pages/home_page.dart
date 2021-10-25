@@ -49,8 +49,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Hello,", style: TextStyles.title.subTitleColor),
-        Text("Peter", style: TextStyles.h1Style),
+        Text("What would you like to do today?", style: TextStyles.h1Style),
       ],
     ).p16;
   }
@@ -84,27 +83,6 @@ class _HomePageState extends State<HomePage> {
                 child: _categoryCard("Heart Rate Monitor",
                     color: Colors.red[400], lightColor: Colors.red[300]),
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HRPage()),
-                  );
-                },
-                child: _categoryCard("Some Function",
-                    color: LightColor.skyBlue,
-                    lightColor: LightColor.lightBlue),
-              ),
-              InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HRPage()),
-                    );
-                  },
-                  child: _categoryCard("Another Function",
-                      color: LightColor.orange,
-                      lightColor: LightColor.lightOrange)),
             ],
           ),
         ),
